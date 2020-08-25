@@ -1,0 +1,22 @@
+@import "../../../variables.scss";
+
+.nav {
+    &__list {
+        display: flex;
+    }
+
+    &__item {
+        margin-right: 20px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        transition: 0.1;
+        border-bottom: 1px solid transparent;
+        &:hover {
+            color: white;
+            cursor: pointer;
+            border-bottom: 1px solid $accent_red;
+        }
+    }
+}

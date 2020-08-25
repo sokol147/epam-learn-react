@@ -1,0 +1,33 @@
+@import "../../../variables.scss";
+
+.search {
+    padding: 10px 90px;
+    display: flex;
+
+    &__input {
+        width: 100%;
+        margin-right: 10px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 20px;
+        font-size: 20px;
+        &::placeholder {
+            color: white;
+        }
+    }
+
+    &__button {
+        background: $accent_red;
+        padding: 0 70px;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 20px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

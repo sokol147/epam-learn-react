@@ -1,0 +1,12 @@
+.film_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 60px;
+}
+
+.resultsFound {
+    padding: 20px 0;
+    color: white;
+    text-transform: uppercase;
+    font-size: 25px;
+}
