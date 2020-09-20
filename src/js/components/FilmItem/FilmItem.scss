@@ -1,0 +1,48 @@
+.filmCard {
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &:hover {
+        .filmCard__more {
+            display: block;
+        }
+    }
+
+    &__poster {
+        height: 80%;
+        overflow: hidden;
+        display: flex;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        color: white;
+        padding: 20px 0 10px;
+    }
+
+    &__genre {
+        color: white;
+    }
+
+    &__more {
+        display: none;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__image {
+        max-width: 100%;
+        height: auto;
+    }
+}
