@@ -5,6 +5,9 @@ import "./Header.scss";
 import Search from "../Search/Search";
 
 export default class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <div className="header">
@@ -13,7 +16,7 @@ export default class Header extends React.Component {
                         <h1 className="header__title">
                             netflix<span>roulette</span>
                         </h1>
-                        <button className="header__button">+ Add Movie</button>
+                        <button className="header__button" onClick={this.props.handleModalOpen}>+ Add Movie</button>
                     </div>
 
                     <div className="callToAction">
