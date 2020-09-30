@@ -1,12 +1,23 @@
 import React from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import { updateMovieListWithSelectedGenre } from "../../actions";
+
 import "./Nav.scss";
 
 export default function Nav() {
-    const genres = ["All", "Documentary", "Comedy", "Horror", "Crime"];
+    const GENRE_LIST = useSelector((state) => state.genreReducer.genreList);
+    const MOVIE_LIST = useSelector((state) => state.movieListReducer);
+    const dispatch = useDispatch();
 
-    const navItems = genres.map((item) => (
-        <li className="nav__item" key={item.toString()}>
+    const navItems = GENRE_LIST.map((item) => (
+        <li
+            className="nav__item"
+            key={item.toString()}
+            onClick={() =>
+                dispatch(updateMovieListWithSelectedGenre(item, MOVIE_LIST))
+            }
+        >
             {item}
         </li>
     ));
