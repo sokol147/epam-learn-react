@@ -1,103 +1,44 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import Modal from "./components/Modal/Modal";
 
+import { fetchMovie, setGenreList, setSortByList } from "./actions";
+
+const GENRE = ["All", "Documentary", "Comedy", "Horror", "Crime", "Adventure"];
+const SORT_BY = ["release_date", "vote_average", "title", "vote_count", "budget"];
+
 const App = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const selectedMovie = useCallback(
-        () => {
-            randomMovie(movieList);
-        },
-        [movieList]
-    )
+    const dispatch = useDispatch();
+    const MOVIE_LIST = useSelector((state) => state.movieListReducer);
+    const GENRE_LIST = useSelector((state) => state.genreReducer.genreList);
+    const SORT_BY_LIST = useSelector(
+        (state) => state.filterReducer.selectedSortBy
+    );
 
-    const movieList = [
-        {
-            id: "1",
-            title: "film 1",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            rating: "4.5",
-            overview: "Long description",
-            runTime: "127",
-            poster: "../src/img/poster-1.jpg",
-        },
-        {
-            id: "2",
-            title: "film 2",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-2.jpg",
-        },
-        {
-            id: "3",
-            title: "film 3",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-3.jpg",
-        },
-        {
-            id: "4",
-            title: "film 4",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-4.jpg",
-        },
-        {
-            id: "5",
-            title: "film 5",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-5.jpg",
-        },
-        {
-            id: "6",
-            title: "film 6",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-6.jpg",
-        },
-        {
-            id: "7",
-            title: "film 7",
-            releaseDate: "2020-07-22",
-            url: "kinopoisk/action/1",
-            year: "2010",
-            genre: "action",
-            overview: "",
-            runTime: "127",
-            poster: "../src/img/poster-7.jpg",
-        },
-    ];
+    useEffect(() => {
+        if (!MOVIE_LIST.length) {
+            dispatch(fetchMovie());
+        }
+        if (!SORT_BY_LIST) {
+            dispatch(setSortByList(SORT_BY));
+        }
+        if (!GENRE_LIST.length) {
+            dispatch(setGenreList(GENRE));
+        }
+    });
+
+    const selectedMovie = useCallback(() => {
+        randomMovie(MOVIE_LIST);
+    }, [MOVIE_LIST]);
 
     function randomMovie(filmList) {
-        return filmList[Math.floor(Math.random()*items.length)];
+        return filmList[Math.floor(Math.random() * items.length)];
     }
 
     function hideModal() {
@@ -111,7 +52,7 @@ const App = () => {
     return (
         <>
             <Header handleModalOpen={openModal} />
-            <Main movieList={movieList} />
+            <Main movieList={MOVIE_LIST} />
             <Footer />
             <Modal
                 isModalOpen={isModalOpen}
@@ -122,6 +63,6 @@ const App = () => {
             />
         </>
     );
-}
+};
 
 export default App;
