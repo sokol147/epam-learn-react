@@ -5,9 +5,9 @@ import "./Main.scss";
 import Nav from "../Nav/Nav";
 import Filter from "../Filter/Filter";
 import FilmList from "../FilmList/FilmList";
-import ErrorBoundaryFilmList from '../ErrorBoundaryFilmList/ErrorBoundaryFilmList';
+import ErrorBoundaryFilmList from "../ErrorBoundaryFilmList/ErrorBoundaryFilmList";
 
-export default function Main() {
+export default function Main(props) {
     return (
         <main className="main">
             <div className="controls">
@@ -15,7 +15,7 @@ export default function Main() {
                 <Filter />
             </div>
             <ErrorBoundaryFilmList>
-                <FilmList />
+                <FilmList movieList={props.movieList} />
             </ErrorBoundaryFilmList>
         </main>
     );
