@@ -1,5 +1,21 @@
 const { combineReducers } = require("redux");
 
+const SELECTED_MOVIE_DEFAULT = {
+    id: 0,
+    title: "Default",
+    tagline: "",
+    vote_average: "",
+    vote_count: "",
+    release_date: "",
+    poster_path:
+        "https://underscoremusic.co.uk/site/wp-content/uploads/2014/05/no-poster.jpg",
+    overview: "",
+    budget: "",
+    revenue: "",
+    genres: [""],
+    runtime: "",
+};
+
 function movieListReducer(state = [], action) {
     switch (action.type) {
         case "SET_MOVIE_LIST":
@@ -46,6 +62,21 @@ function genreReducer(state = { genreList: [], selectedGenre: "" }, action) {
     }
 }
 
+function selectedMovieReducer(
+    state = { selectedMovie: SELECTED_MOVIE_DEFAULT },
+    action
+) {
+    switch (action.type) {
+        case "SET_SELECTED_MOVIE":
+            return {
+                ...state,
+                selectedMovie: action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
 function filterReducer(state = { sortBy: [], selectedSortBy: "" }, action) {
     switch (action.type) {
         case "SET_SORT_BY_LIST":
@@ -67,6 +98,7 @@ const rootReducer = combineReducers({
     movieListReducer,
     genreReducer,
     filterReducer,
+    selectedMovieReducer,
 });
 
 export default rootReducer;
