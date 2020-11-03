@@ -83,10 +83,10 @@ function addMovieToList(movie) {
     };
 }
 
-export function fetchMovie(sortBy = "") {
+export function fetchMovie(params = {}) {
     return (dispatch) => {
-        dispatch(requestMovies(sortBy));
-        return fetch("http://localhost:4000/movies", { method: "GET", sortBy })
+        dispatch(requestMovies(params));
+        return fetch("http://localhost:4000/movies", { method: "GET", params })
             .then((response) => response.json())
             .then((json) => dispatch(setMovieList(json.data)));
     };
