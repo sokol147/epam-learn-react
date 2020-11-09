@@ -45,7 +45,7 @@ function movieListReducer(state = [], action) {
     }
 }
 
-function genreReducer(state = { genreList: [], selectedGenre: "" }, action) {
+export function genreReducer(state = { genreList: [], selectedGenre: "" }, action) {
     switch (action.type) {
         case "SET_GENRE_LIST":
             return {
