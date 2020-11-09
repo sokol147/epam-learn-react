@@ -20,6 +20,7 @@ const App = () => {
     const SORT_BY_LIST = useSelector(
         (state) => state.filterReducer.selectedSortBy
     );
+    let SELECTED_MOVIE = useSelector((state) => state.selectedMovieReducer.selectedMovie);
 
     useEffect(() => {
         if (!MOVIE_LIST.length) {
@@ -31,15 +32,7 @@ const App = () => {
         if (!GENRE_LIST.length) {
             dispatch(setGenreList(GENRE));
         }
-    });
-
-    const selectedMovie = useCallback(() => {
-        randomMovie(MOVIE_LIST);
-    }, [MOVIE_LIST]);
-
-    function randomMovie(filmList) {
-        return filmList[Math.floor(Math.random() * items.length)];
-    }
+    }, []);
 
     function hideModal() {
         setIsModalOpen(false);

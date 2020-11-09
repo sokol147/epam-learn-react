@@ -21,14 +21,14 @@ function deleteMovie(id) {
     };
 }
 
-function setSelectedMovie(movie) {
+export function setSelectedMovie(movie) {
     return {
         type: "SET_SELECTED_MOVIE",
         payload: movie,
     };
 }
 
-function updateMovieOnApi(movie) {
+export function updateMovieOnApi(movie) {
     return (dispatch) => {
         dispatch(updateMovie(movie));
         return fetch("http://localhost:4000/movies", {
@@ -40,12 +40,12 @@ function updateMovieOnApi(movie) {
     };
 }
 
-function addMovieOnApi(movie) {
+export function addMovieOnApi(movie) {
     return (dispatch) => {
         dispatch(addMovieToList(movie));
         return fetch("http://localhost:4000/movies", {
             method: "POST",
-            body: { movie },
+            body: JSON.stringify(movie),
         })
             .then((response) => response.json())
             .then((json) => console.log(json));
