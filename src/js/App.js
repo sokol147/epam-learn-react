@@ -1,15 +1,25 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import Footer from "./components/Footer/Footer";
 import Modal from "./components/Modal/Modal";
+
+import HomePage from "./pages/Home";
+import NoMatch from "./pages/NoMatch";
+import MovieDetailPage from "./pages/MovieDetailPage";
+import SearchPage from "./pages/Search";
 
 import { fetchMovie, setGenreList, setSortByList } from "./actions";
 
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
 const GENRE = ["All", "Documentary", "Comedy", "Horror", "Crime", "Adventure"];
-const SORT_BY = ["release_date", "vote_average", "title", "vote_count", "budget"];
+const SORT_BY = [
+    "release_date",
+    "vote_average",
+    "title",
+    "vote_count",
+    "budget",
+];
 
 const App = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +30,9 @@ const App = () => {
     const SORT_BY_LIST = useSelector(
         (state) => state.filterReducer.selectedSortBy
     );
-    let SELECTED_MOVIE = useSelector((state) => state.selectedMovieReducer.selectedMovie);
+    let SELECTED_MOVIE = useSelector(
+        (state) => state.selectedMovieReducer.selectedMovie
+    );
 
     useEffect(() => {
         if (!MOVIE_LIST.length) {
@@ -43,10 +55,7 @@ const App = () => {
     }
 
     return (
-        <>
-            <Header handleModalOpen={openModal} />
-            <Main movieList={MOVIE_LIST} />
-            <Footer />
+        <Router>
             <Modal
                 isModalOpen={isModalOpen}
                 modalType="add"
@@ -54,7 +63,22 @@ const App = () => {
                 modalTitle="Add movie"
                 handelModalClose={hideModal}
             />
-        </>
+            <Switch>
+                <Redirect exact from="/" to="/search" />
+                <Route path="/search/:searchQuery">
+                    <HomePage handleModalOpen={openModal} />
+                </Route>
+                <Route path="/search">
+                    <SearchPage />
+                </Route>
+                <Route path="/film/:id">
+                    <MovieDetailPage handleModalOpen={openModal} />
+                </Route>
+                <Route path="*">
+                    <NoMatch handleModalOpen={openModal} />
+                </Route>
+            </Switch>
+        </Router>
     );
 };
 

@@ -1,6 +1,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    output: {
+        publicPath: "/",
+    },
     module: {
         rules: [
             {
@@ -30,6 +33,9 @@ module.exports = {
                 },
             },
         ],
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({

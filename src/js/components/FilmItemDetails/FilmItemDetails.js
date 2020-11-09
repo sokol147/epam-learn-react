@@ -17,7 +17,7 @@ export default function FilmItemDetails(props) {
             <div className="film-detail detail">
                 <div className="detail__image-wrapper">
                     <img
-                        src={props.movie.poster}
+                        src={props.movie.poster_path}
                         alt="film poster"
                         className="detail__image"
                     ></img>
@@ -28,7 +28,7 @@ export default function FilmItemDetails(props) {
                             {props.movie.title}
                         </span>
                         <span className="detail__rating">
-                            {props.movie.rating}
+                            {props.movie.vote_average}
                         </span>
                     </div>
                     <span className="detail__short-info">
@@ -37,7 +37,7 @@ export default function FilmItemDetails(props) {
                     <div>
                         <span className="detail__year">{props.movie.year}</span>
                         <span className="detail__time">
-                            {props.movie.runTime} min
+                            {props.movie.runtime} min
                         </span>
                     </div>
                     <p className="detail__description">
