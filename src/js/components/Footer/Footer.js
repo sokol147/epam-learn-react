@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./Footer.scss";
+// import "./Footer.scss";
 
-export default function Footer() {
+const Footer = () => {
     return (
         <footer className="footer">
             <h1 className="header__title">
@@ -11,3 +11,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default Footer;
