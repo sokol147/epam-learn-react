@@ -10,7 +10,7 @@ import SearchPage from "./pages/Search";
 
 import { fetchMovie, setGenreList, setSortByList } from "./actions";
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 const GENRE = ["All", "Documentary", "Comedy", "Horror", "Crime", "Adventure"];
 const SORT_BY = [
@@ -21,7 +21,7 @@ const SORT_BY = [
     "budget",
 ];
 
-const App = () => {
+const App = ({Router, location}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const App = () => {
     }
 
     return (
-        <Router>
+        <Router location={location}>
             <Modal
                 isModalOpen={isModalOpen}
                 modalType="add"

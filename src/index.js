@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate } from 'react-dom';
 import { Provider } from "react-redux";
 
 import App from "./js/App";
@@ -9,9 +9,9 @@ import configureStore from "./js/store";
 
 const rootElement = document.getElementById("root");
 
-const store = configureStore();
+const store = configureStore(window.PRELOADED_STATE);
 
-ReactDOM.render(
+hydrate(
     <Provider store={store}>
         <App />
     </Provider>,
